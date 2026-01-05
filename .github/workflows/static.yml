@@ -1,0 +1,418 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+    !doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Val Ortiz | Executive Advisor • Product & Program Leader • Capital Strategy</title>
+  <meta name="description" content="Val Ortiz — CEO/Founder, Advisory Board Member, Executive Coach, and technology leader supporting growth, M&A, and capital strategy." />
+
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#121a33;
+      --text:#eef2ff;
+      --muted:#b8c1ff;
+      --line:rgba(255,255,255,.12);
+      --accent:#7c3aed;
+      --accent2:#22c55e;
+      --shadow: 0 20px 50px rgba(0,0,0,.35);
+      --radius:18px;
+      --max:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1100px 700px at 20% -10%, rgba(124,58,237,.35), transparent 60%),
+        radial-gradient(1000px 700px at 90% 10%, rgba(34,197,94,.20), transparent 55%),
+        radial-gradient(900px 700px at 50% 110%, rgba(56,189,248,.15), transparent 55%),
+        var(--bg);
+      line-height:1.5;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 80px}
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; padding:14px 0 8px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:.2px
+    }
+    .logo{
+      width:40px; height:40px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(124,58,237,.9), rgba(34,197,94,.75));
+      box-shadow: var(--shadow);
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .navlinks{
+      display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end;
+      font-size:14px; color:var(--muted);
+    }
+    .navlinks a{padding:8px 10px; border-radius:12px}
+    .navlinks a:hover{background:rgba(255,255,255,.06); color:var(--text)}
+    .hero{
+      margin-top:18px;
+      display:grid; grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+    }
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .nav{flex-direction:column; align-items:flex-start}
+      .navlinks{justify-content:flex-start}
+    }
+    .card{
+      background: rgba(18,26,51,.78);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    .heroMain{padding:28px}
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      color:var(--muted); font-size:13px; letter-spacing:.35px; text-transform:uppercase;
+      background: rgba(255,255,255,.06);
+      padding:8px 12px; border-radius: 999px; border:1px solid var(--line);
+    }
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--accent2); box-shadow:0 0 0 4px rgba(34,197,94,.15)}
+    h1{margin:14px 0 10px; font-size:44px; line-height:1.05}
+    @media (max-width: 520px){ h1{font-size:36px} }
+    .sub{
+      margin:0 0 18px;
+      color:rgba(238,242,255,.86);
+      font-size:16px;
+    }
+    .ctaRow{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 14px; border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      font-weight:600; font-size:14px;
+    }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(34,197,94,.85));
+      border:1px solid rgba(255,255,255,.18);
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn:active{transform: translateY(0)}
+    .heroSide{padding:18px}
+    .mini{
+      padding:16px; border-radius:16px; border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      margin-bottom:14px;
+    }
+    .stats{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+    .stat{
+      padding:14px; border-radius:16px; border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+    }
+    .stat b{font-size:20px; display:block}
+    .stat span{color:var(--muted); font-size:13px}
+    .section{margin-top:18px}
+    .sectionHeader{
+      padding:18px 22px; display:flex; align-items:flex-end; justify-content:space-between; gap:12px
+    }
+    .sectionHeader h2{margin:0; font-size:20px}
+    .sectionHeader p{margin:0; color:var(--muted); font-size:13px}
+    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; padding:0 18px 18px}
+    @media (max-width: 900px){ .grid3{grid-template-columns:1fr} }
+    .tile{padding:18px; border-radius:16px; border:1px solid var(--line); background: rgba(255,255,255,.04)}
+    .tile h3{margin:0 0 6px; font-size:16px}
+    .tile p{margin:0; color:rgba(238,242,255,.78); font-size:14px}
+    .pillRow{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+    .pill{
+      font-size:12px; color:var(--muted);
+      border:1px solid var(--line);
+      padding:6px 10px; border-radius:999px;
+      background: rgba(255,255,255,.03);
+    }
+    .about{
+      display:grid; grid-template-columns: 1fr 1fr; gap:14px;
+      padding:0 18px 18px;
+    }
+    @media (max-width: 900px){ .about{grid-template-columns:1fr} }
+    .about .tile{height:100%}
+    .strip{
+      display:flex; gap:10px; flex-wrap:wrap;
+      padding:0 18px 18px;
+    }
+    .chip{
+      padding:10px 12px; border-radius:14px; border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color:rgba(238,242,255,.85);
+      font-size:13px;
+    }
+    form{display:grid; gap:10px; padding:0 18px 18px}
+    input, textarea{
+      width:100%;
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px 12px;
+      color:var(--text);
+      font-size:14px;
+      outline:none;
+    }
+    textarea{min-height:110px; resize:vertical}
+    .footer{
+      margin-top:22px;
+      padding:18px;
+      color:rgba(238,242,255,.65);
+      font-size:12px;
+      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      border-top:1px solid var(--line);
+    }
+    .note{color:var(--muted); font-size:12px}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div style="font-size:15px;">Val Ortiz</div>
+          <div style="font-size:12px; color:var(--muted); margin-top:2px;">Executive Advisor • Product/Program Leadership • Capital Strategy</div>
+        </div>
+      </div>
+      <nav class="navlinks">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#work">Focus Areas</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <section class="card heroMain">
+        <div class="kicker"><span class="dot"></span> Investor-ready leadership • tech + operations • outcome-driven</div>
+        <h1>Build, scale, and de-risk complex initiatives—fast.</h1>
+        <p class="sub">
+          I help leadership teams ship high-impact products, execute technology transformations, and navigate M&A / divestitures
+          with clarity, governance, and measurable ROI.
+        </p>
+
+        <div class="ctaRow">
+          <a class="btn primary" href="#contact">Book a strategy call</a>
+          <a class="btn" href="#services">View services</a>
+          <a class="btn" href="https://www.linkedin.com/in/val-og/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="btn" href="https://www.imdb.com/" target="_blank" rel="noreferrer">IMDb</a>
+        </div>
+
+        <div class="pillRow">
+          <span class="pill">Program & Product Leadership</span>
+          <span class="pill">Physical Security Tech</span>
+          <span class="pill">M&A / Divestitures</span>
+          <span class="pill">AI / Innovation Enablement</span>
+          <span class="pill">Executive Coaching</span>
+        </div>
+      </section>
+
+      <aside class="card heroSide">
+        <div class="mini">
+          <div style="font-weight:700; margin-bottom:6px;">At-a-glance</div>
+          <div class="note">Update these numbers to match your exact metrics.</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b>20+ yrs</b><span>Technology leadership</span></div>
+          <div class="stat"><b>$58M</b><span>Security tech budget</span></div>
+          <div class="stat"><b>$100M+</b><span>VC approvals supported</span></div>
+          <div class="stat"><b>Global</b><span>Onshore/offshore teams</span></div>
+        </div>
+
+        <div class="mini" style="margin-top:14px;">
+          <div style="font-weight:700; margin-bottom:8px;">How I help</div>
+          <ul style="margin:0; padding-left:18px; color:rgba(238,242,255,.82); font-size:14px;">
+            <li>Roadmaps, governance, and delivery execution</li>
+            <li>M&A integration playbooks + tech cutover</li>
+            <li>Stakeholder alignment + vendor accountability</li>
+            <li>Board-ready narratives and investor materials</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+
+    <section id="services" class="card section">
+      <div class="sectionHeader">
+        <div>
+          <h2>Services</h2>
+          <p>Engagements available as interim leadership, advisory, or project-based delivery.</p>
+        </div>
+      </div>
+
+      <div class="grid3">
+        <div class="tile">
+          <h3>Product & Program Leadership</h3>
+          <p>Portfolio strategy, roadmap execution, operating cadence, and delivery governance.</p>
+          <div class="pillRow">
+            <span class="pill">Agile/Scrum</span><span class="pill">Waterfall</span><span class="pill">ITIL</span>
+          </div>
+        </div>
+        <div class="tile">
+          <h3>M&A / Divestitures</h3>
+          <p>Due diligence support, TSA planning, cutover management, and technology transitions.</p>
+          <div class="pillRow">
+            <span class="pill">Integration</span><span class="pill">Carve-outs</span><span class="pill">Risk mitigation</span>
+          </div>
+        </div>
+        <div class="tile">
+          <h3>Physical Security Technology</h3>
+          <p>Security technology strategy, vendor oversight, capital projects, and operational escalation.</p>
+          <div class="pillRow">
+            <span class="pill">Access control</span><span class="pill">Video</span><span class="pill">Governance</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="card section">
+      <div class="sectionHeader">
+        <div>
+          <h2>About Val</h2>
+          <p>Replace the text below with your final deck bio (I can tailor it).</p>
+        </div>
+      </div>
+
+      <div class="about">
+        <div class="tile">
+          <h3>Executive summary</h3>
+          <p>
+            Val Ortiz is a seasoned executive, CEO/Founder, and advisory leader with 20+ years of experience driving
+            technology delivery, business transformation, and cross-functional execution across multiple industries.
+            Val supports leadership teams with product strategy, M&A integration, and operational governance—translating
+            complexity into measurable outcomes.
+          </p>
+        </div>
+        <div class="tile">
+          <h3>Credibility highlights</h3>
+          <ul style="margin:0; padding-left:18px; color:rgba(238,242,255,.82); font-size:14px;">
+            <li>Managed large budgets and vendor ecosystems; optimized spend for ROI.</li>
+            <li>Led global teams across engineering, architecture, operations, and partners.</li>
+            <li>Supported capital strategy including VC approvals of $100M+ (as applicable).</li>
+            <li>Creative/entertainment experience alongside enterprise technology leadership.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="strip">
+        <div class="chip">Executive Coaching</div>
+        <div class="chip">Strategic Planning</div>
+        <div class="chip">Stakeholder Management</div>
+        <div class="chip">Vendor & Procurement</div>
+        <div class="chip">Cloud / SDLC</div>
+        <div class="chip">Security Programs</div>
+      </div>
+    </section>
+
+    <section id="work" class="card section">
+      <div class="sectionHeader">
+        <div>
+          <h2>Focus Areas</h2>
+          <p>What you can expect when we engage.</p>
+        </div>
+      </div>
+
+      <div class="grid3">
+        <div class="tile">
+          <h3>Governance that scales</h3>
+          <p>Clear roles, KPIs, and decision paths to accelerate delivery and reduce noise.</p>
+        </div>
+        <div class="tile">
+          <h3>Risk-first execution</h3>
+          <p>Interdependency mapping, cutover plans, and issue/risk management that sticks.</p>
+        </div>
+        <div class="tile">
+          <h3>Board-ready communication</h3>
+          <p>Executive summaries, deck narratives, and reporting that earns confidence.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="card section">
+      <div class="sectionHeader">
+        <div>
+          <h2>Contact</h2>
+          <p>Drop a message and I’ll respond within 1–2 business days.</p>
+        </div>
+      </div>
+
+      <!-- This form uses mailto by default (simple). For a real backend, see notes below. -->
+      <form action="mailto:YOUR_EMAIL@DOMAIN.COM" method="post" enctype="text/plain">
+        <input type="text" name="name" placeholder="Your name" required />
+        <input type="email" name="email" placeholder="Your email" required />
+        <input type="text" name="subject" placeholder="Subject (e.g., Interim role, Advisory, M&A)" />
+        <textarea name="message" placeholder="Tell me what you're building and what success looks like." required></textarea>
+        <button class="btn primary" type="submit">Send message</button>
+        <div class="note">
+          Tip: Replace <b>YOUR_EMAIL@DOMAIN.COM</b> in the form action. For a professional form (no mail app),
+          use Formspree, Web3Forms, or a simple serverless function.
+        </div>
+      </form>
+    </section>
+
+    <footer class="footer">
+      <div>© <span id="year"></span> Val Ortiz. All rights reserved.</div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="pill" href="#services">Services</a>
+        <a class="pill" href="#about">About</a>
+        <a class="pill" href="#contact">Contact</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
